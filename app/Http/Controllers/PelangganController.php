@@ -1,3 +1,4 @@
+
 <?php
 
 namespace App\Http\Controllers;
@@ -22,12 +23,29 @@ class PelangganController extends Controller
     {
         $request->validate([
             'nama' => 'required',
+            'kategori' => 'required',
             'email' => 'required|email|unique:pelanggans,email',
-            'no_telepon' => 'required',
+            'tanggal_daftar' => 'required|date',
             'alamat' => 'required',
+            'keterangan' => 'nullable',
         ]);
 
-        Pelanggan::create($request->all());
+        $kode = 'PLG' . str_pad(
+            (Pelanggan::max('id') ?? 0) + 1,
+            3,
+            '0',
+            STR_PAD_LEFT
+        );
+
+        Pelanggan::create([
+            'kode_pelanggan' => $kode,
+            'nama' => $request->nama,
+            'kategori' => $request->kategori,
+            'email' => $request->email,
+            'tanggal_daftar' => $request->tanggal_daftar,
+            'alamat' => $request->alamat,
+            'keterangan' => $request->keterangan,
+        ]);
 
         return redirect()->route('pelanggan.index');
     }
@@ -50,12 +68,21 @@ class PelangganController extends Controller
 
         $request->validate([
             'nama' => 'required',
+            'kategori' => 'required',
             'email' => 'required|email|unique:pelanggans,email,' . $id,
-            'no_telepon' => 'required',
+            'tanggal_daftar' => 'required|date',
             'alamat' => 'required',
+            'keterangan' => 'nullable',
         ]);
 
-        $pelanggan->update($request->all());
+        $pelanggan->update([
+            'nama' => $request->nama,
+            'kategori' => $request->kategori,
+            'email' => $request->email,
+            'tanggal_daftar' => $request->tanggal_daftar,
+            'alamat' => $request->alamat,
+            'keterangan' => $request->keterangan,
+        ]);
 
         return redirect()->route('pelanggan.index');
     }
