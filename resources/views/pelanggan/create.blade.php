@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -12,16 +13,26 @@
         @csrf
 
         <label>Nama</label><br>
-        <input type="text" name="nama"><br><br>
+        <input type="text" name="nama" required><br><br>
+
+        <label>Kategori</label><br>
+        <select name="kategori" required>
+            <option value="">Pilih Kategori</option>
+            <option value="Reguler">Reguler</option>
+            <option value="VIP">VIP</option>
+        </select><br><br>
 
         <label>Email</label><br>
-        <input type="email" name="email"><br><br>
+        <input type="email" name="email" required><br><br>
 
-        <label>No Telepon</label><br>
-        <input type="text" name="no_telepon"><br><br>
+        <label>Tanggal Daftar</label><br>
+        <input type="date" name="tanggal_daftar" required><br><br>
 
         <label>Alamat</label><br>
-        <textarea name="alamat"></textarea><br><br>
+        <textarea name="alamat" required></textarea><br><br>
+
+        <label>Keterangan</label><br>
+        <textarea name="keterangan"></textarea><br><br>
 
         <button type="submit">Simpan</button>
     </form>
