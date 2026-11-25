@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -13,17 +14,29 @@
         @csrf
         @method('PUT')
 
+        <label>Kode Pelanggan</label><br>
+        <input type="text" value="{{ $pelanggan->kode_pelanggan }}" readonly><br><br>
+
         <label>Nama</label><br>
-        <input type="text" name="nama" value="{{ $pelanggan->nama }}"><br><br>
+        <input type="text" name="nama" value="{{ $pelanggan->nama }}" required><br><br>
+
+        <label>Kategori</label><br>
+        <select name="kategori" required>
+            <option value="Reguler" {{ $pelanggan->kategori == 'Reguler' ? 'selected' : '' }}>Reguler</option>
+            <option value="VIP" {{ $pelanggan->kategori == 'VIP' ? 'selected' : '' }}>VIP</option>
+        </select><br><br>
 
         <label>Email</label><br>
-        <input type="email" name="email" value="{{ $pelanggan->email }}"><br><br>
+        <input type="email" name="email" value="{{ $pelanggan->email }}" required><br><br>
 
-        <label>No Telepon</label><br>
-        <input type="text" name="no_telepon" value="{{ $pelanggan->no_telepon }}"><br><br>
+        <label>Tanggal Daftar</label><br>
+        <input type="date" name="tanggal_daftar" value="{{ $pelanggan->tanggal_daftar }}" required><br><br>
 
         <label>Alamat</label><br>
-        <textarea name="alamat">{{ $pelanggan->alamat }}</textarea><br><br>
+        <textarea name="alamat" required>{{ $pelanggan->alamat }}</textarea><br><br>
+
+        <label>Keterangan</label><br>
+        <textarea name="keterangan">{{ $pelanggan->keterangan }}</textarea><br><br>
 
         <button type="submit">Update</button>
     </form>
