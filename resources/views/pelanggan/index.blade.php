@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -14,11 +15,14 @@
     <table border="1" cellpadding="10" cellspacing="0">
         <thead>
             <tr>
-                <th>No</th>
+                <th>ID</th>
+                <th>Kode Pelanggan</th>
                 <th>Nama</th>
+                <th>Kategori</th>
                 <th>Email</th>
-                <th>No Telepon</th>
+                <th>Tanggal Daftar</th>
                 <th>Alamat</th>
+                <th>Keterangan</th>
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -26,21 +30,24 @@
         <tbody>
             @foreach ($pelanggans as $pelanggan)
                 <tr>
-                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $pelanggan->id }}</td>
+                    <td>{{ $pelanggan->kode_pelanggan }}</td>
                     <td>{{ $pelanggan->nama }}</td>
+                    <td>{{ $pelanggan->kategori }}</td>
                     <td>{{ $pelanggan->email }}</td>
-                    <td>{{ $pelanggan->no_telepon }}</td>
+                    <td>{{ $pelanggan->tanggal_daftar }}</td>
                     <td>{{ $pelanggan->alamat }}</td>
+                    <td>{{ $pelanggan->keterangan }}</td>
                     <td>
-                       <a href="{{ route('pelanggan.show', $pelanggan->id) }}">Detail</a> |
+                        <a href="{{ route('pelanggan.edit', $pelanggan->id) }}">Edit</a>
 
-                       <a href="{{ route('pelanggan.edit', $pelanggan->id) }}">Edit</a>
+                        <form action="{{ route('pelanggan.destroy', $pelanggan->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit">Hapus</button>
+                        </form>
 
-                     <form action="{{ route('pelanggan.destroy', $pelanggan->id) }}" method="POST">
-                       @csrf
-                         @method('DELETE')
-                        <button type="submit">Hapus</button>
-                     </form>
+                        <a href="{{ route('pelanggan.show', $pelanggan->id) }}">Update</a>
                     </td>
                 </tr>
             @endforeach
